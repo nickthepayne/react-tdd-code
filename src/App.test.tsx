@@ -1,25 +1,34 @@
 import React from 'react';
-import { render, debugDOM } from 'react-testing-library';
-import App from './App';
-import ProductList from './ProductList';
+import { cleanup, render, RenderResult } from 'react-testing-library';
+import App, { mockProducts } from './App';
 
-jest.mock('./ProductList', () => {
-  return jest.fn(() => null);
-});
-
-jest.mock('./ShoppingCart', () => {
-  return jest.fn(() => null);
-});
+afterEach(cleanup);
 
 describe('App', () => {
 
-  it('should render', () => {
-    render(<App />);
-    const context = expect.any(Object);
-    expect(ProductList).toHaveBeenCalledWith({
-      onAddProduct: expect.any(Function),
-      products: ['Tomato', 'Apple', 'Oranges'],
-    }, context);
+  let app: RenderResult;
+
+  beforeEach(() => {
+    app = render(<App/>);
+  });
+
+  it('should initially display "Cart is empty"', () => {
+    expect(app.queryByText('Cart is empty')).not.toBeNull();
+  });
+
+  it('should initially not display "No Products"', () => {
+    expect(app.queryByText('No Products')).toBeNull();
+  });
+
+  it('should initially display all products', () => {
+    const productNames = app.queryAllByTestId('product-name')
+      .map(element => element.innerHTML);
+
+    expect(productNames).toEqual(mockProducts);
+  });
+
+  it('should add the product to the cart when the add button is clicked', () => {
+
   });
 
 });

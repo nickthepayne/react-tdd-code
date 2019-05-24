@@ -13,11 +13,11 @@ const ProductList: React.FC<ProductListProps> = ({ products, onAddProduct }) => 
   return (
     <div>
       {products.map(product => (
-        <div key={product}>
-          <span>{product}</span>
+        <div key={product} data-testid="product">
+          <span data-testid="product-name">{product}</span>
           <button
             onClick={() => onAddProduct(product)}
-            data-testid={`add-product-${product}`}
+            data-testid={`add-product`}
           >Add
           </button>
         </div>

@@ -42,8 +42,8 @@ describe('ProductList', () => {
 
     describe('when user adds a product', () => {
       it('should call addProduct', () => {
-        fireEvent.click(productList.getByTestId('add-product-Orange'));
-        expect(onAddProduct).toHaveBeenCalledWith('Orange');
+        fireEvent.click(productList.getAllByTestId('add-product')[0]);
+        expect(onAddProduct).toHaveBeenCalledWith('Tomato');
       });
     });
   });
