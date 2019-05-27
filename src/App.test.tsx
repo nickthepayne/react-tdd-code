@@ -22,7 +22,7 @@ describe('App', () => {
 
   it('should initially display all products', () => {
     const productNames = app.queryAllByTestId('product-name')
-      .map(element => element.innerHTML);
+      .map((element: { innerHTML: any; }) => element.innerHTML);
 
     expect(productNames).toEqual(mockProducts);
   });
