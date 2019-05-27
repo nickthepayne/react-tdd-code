@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, RenderResult } from 'react-testing-library';
+import { cleanup, fireEvent, render, RenderResult } from 'react-testing-library';
 import App, { mockProducts } from './App';
 
 afterEach(cleanup);
@@ -28,7 +28,9 @@ describe('App', () => {
   });
 
   it('should add the product to the cart when the add button is clicked', () => {
-
+    fireEvent.click(app.queryAllByTestId('add-product')[0]);
+    const cartItems = app.queryAllByTestId('cart-item');
+    expect(cartItems.length).toBe(1);
   });
 
 });

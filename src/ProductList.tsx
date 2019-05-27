@@ -17,7 +17,7 @@ const ProductList: React.FC<ProductListProps> = ({ products, onAddProduct }) => 
           <span data-testid="product-name">{product}</span>
           <button
             onClick={() => onAddProduct(product)}
-            data-testid={`add-product`}
+            data-testid="add-product"
           >Add
           </button>
         </div>

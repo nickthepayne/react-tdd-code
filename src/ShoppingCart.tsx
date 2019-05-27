@@ -12,7 +12,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ products }) => {
   return (
     <div>
       {products.map(product => (
-        <div key={product}>{product}</div>
+        <div data-testid="cart-item" key={product}>{product}</div>
       ))}
     </div>
   );
