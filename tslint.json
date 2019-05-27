@@ -13,7 +13,8 @@
     "object-literal-sort-keys": false,
     "jsx-no-multiline-js": false,
     "jsx-no-lambda": false,
-    "arrow-parens": [true, "ban-single-arg-parens"]
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "trailing-comma": false
   },
   "rulesDirectory": []
 }
