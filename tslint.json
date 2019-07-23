@@ -15,7 +15,8 @@
     "jsx-no-lambda": false,
     "arrow-parens": [true, "ban-single-arg-parens"],
     "no-console": false,
-    "trailing-comma": false
+    "trailing-comma": false,
+    "no-empty": false
   },
   "rulesDirectory": []
 }

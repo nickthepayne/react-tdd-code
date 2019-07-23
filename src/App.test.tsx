@@ -4,30 +4,40 @@ import App, { dummyProducts } from './App';
 
 afterEach(cleanup);
 
+jest.mock('./ManyChildren', () => ({
+  ManyChildren: 'div'
+}));
+
 describe('App', () => {
 
-  let app: RenderResult;
+  let component: RenderResult;
 
   beforeEach(() => {
-    app = render(<App/>);
+    component = render(<App/>);
   });
 
-  it('should initially show "Empty Cart"', () => {
-    expect(app.queryByText('Empty Cart')).not.toBeNull();
+  it('should show "Empty Cart"', () => {
+    expect(component.getByText('Empty Cart')).not.toBeNull();
   });
 
-  it('should show all products', () => {
+  it('should display all products', () => {
     dummyProducts.forEach(product => {
-      expect(app.queryByText(product)).not.toBeNull();
+      expect(component.getByText(product)).not.toBeNull();
     });
   });
 
-  it('should add product to cart when add is clicked', () => {
-    const add = app.queryAllByText('Add')[0];
-    fireEvent.click(add);
+  it('should add a product to the shopping cart', () => {
+    const allProductItems = component.getAllByTestId('product-item');
+    const productToAdd = allProductItems[0];
 
-    const cartItems = app.queryAllByTestId('cart-item');
-    expect(cartItems.length).toBe(1);
-    expect(app.queryByText('Empty Cart')).toBeNull();
+    fireEvent.click(productToAdd);
+
+    const cartItems = component.getAllByTestId('cart-item');
+    expect(cartItems).toHaveLength(1);
+    expect(component.queryByText('Empty Cart')).toBeNull();
+  });
+
+  it('should not render many children', () => {
+    expect(component.queryAllByText('child')).toHaveLength(0);
   });
 });

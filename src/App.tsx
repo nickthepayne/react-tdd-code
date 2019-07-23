@@ -1,35 +1,66 @@
 import React, { useState } from 'react';
 import './App.css';
-import ProductList from './ProductList';
+import { ManyChildren } from './ManyChildren';
 
 export const dummyProducts = ['Tomato', 'Apple', 'Orange'];
 
 const App: React.FC = () => {
+
   const [cart, setCart] = useState<string[]>([]);
 
-  function addToCart(product: string) {
-    return setCart([...cart, product]);
+  function addProductToCart(product: string) {
+    setCart([...cart, product]);
   }
 
   return (
     <div>
-      <div>
-        {cart.length === 0 && <div>Empty Cart</div>}
-        {cart.map(item => (
-          <div
-            key={item}
-            data-testid="cart-item"
-          >
-            {item}
-          </div>
-        ))}
-      </div>
+      <ShoppingCart
+        cart={cart}
+      />
       <ProductList
         products={dummyProducts}
-        add={addToCart}
+        addProduct={addProductToCart}
       />
+      <ManyChildren/>
     </div>
   );
 };
 
 export default App;
+
+interface ShoppingCartProps {
+  cart: string[];
+}
+
+const ShoppingCart: React.FC<ShoppingCartProps> = ({cart}) => (
+  <div>
+    {cart.length === 0 && 'Empty Cart'}
+    {cart.map(cartItem => (
+      <div
+        data-testid="cart-item"
+        key={cartItem}
+      >
+        {cartItem}
+      </div>
+    ))}
+  </div>
+);
+
+interface ProductListProps {
+  products: string[];
+  addProduct: (product: string) => void;
+}
+
+const ProductList: React.FC<ProductListProps> = ({products, addProduct}) => (
+  <div>
+    {products.map(product => (
+      <div
+        data-testid="product-item"
+        key={product}
+        onClick={() => addProduct(product)}
+      >
+        {product}
+      </div>
+    ))}
+  </div>
+);
