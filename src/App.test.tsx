@@ -1,12 +1,22 @@
 import React from 'react';
 import { cleanup, render, RenderResult, fireEvent } from 'react-testing-library';
-import App, { dummyProducts } from './App';
+import App, { dummyProducts, ShoppingCart, ShoppingCartProps } from './App';
 
 afterEach(cleanup);
 
-jest.mock('./ManyChildren', () => ({
-  ManyChildren: 'div'
-}));
+describe('ShoppingCart', () => {
+
+  it('should show x2 when an item is added twice', () => {
+    const props: ShoppingCartProps = {
+      cart: ['item1', 'item1']
+    };
+
+    const component = render(<ShoppingCart {...props} />);
+
+    expect(component.getByText('item1 x2')).not.toBeNull();
+  });
+
+});
 
 describe('App', () => {
 
@@ -16,7 +26,7 @@ describe('App', () => {
     component = render(<App/>);
   });
 
-  it('should show "Empty Cart"', () => {
+  it('should display "Empty Cart', () => {
     expect(component.getByText('Empty Cart')).not.toBeNull();
   });
 
@@ -26,18 +36,15 @@ describe('App', () => {
     });
   });
 
-  it('should add a product to the shopping cart', () => {
+  it('should add a product to the cart', () => {
     const allProductItems = component.getAllByTestId('product-item');
     const productToAdd = allProductItems[0];
 
     fireEvent.click(productToAdd);
 
-    const cartItems = component.getAllByTestId('cart-item');
-    expect(cartItems).toHaveLength(1);
+    const allCartItems = component.getAllByTestId('cart-item');
+    expect(allCartItems).toHaveLength(1);
+    expect(allCartItems[0].innerHTML).toBe('Tomato');
     expect(component.queryByText('Empty Cart')).toBeNull();
-  });
-
-  it('should not render many children', () => {
-    expect(component.queryAllByText('child')).toHaveLength(0);
   });
 });
