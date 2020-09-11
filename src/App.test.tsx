@@ -23,11 +23,11 @@ describe('App', () => {
   let component: RenderResult;
 
   beforeEach(() => {
-    component = render(<App/>);
+    component = render(<App />);
   });
 
-  it('should display "Empty Cart', () => {
-    expect(component.getByText('Empty Cart')).not.toBeNull();
+  it('should display "Cart is empty"', () => {
+    expect(component.getByText('Cart is empty')).not.toBeNull();
   });
 
   it('should display all products', () => {
