@@ -6,7 +6,7 @@
   ],
   "jsRules": {},
   "rules": {
-    "quotemark": [true, "single", "jsx-double"],
+    "quotemark": [false, "single", "jsx-double"],
     "ordered-imports": false,
     "no-trailing-whitespace": [true, "ignore-blank-lines"],
     "interface-name": [true, "never-prefix"],
