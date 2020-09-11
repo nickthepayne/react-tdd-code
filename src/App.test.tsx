@@ -1,6 +1,7 @@
 import React from 'react';
 import { cleanup, render, RenderResult, fireEvent } from 'react-testing-library';
-import App, { dummyProducts, ShoppingCart, ShoppingCartProps } from './App';
+import App, { dummyProducts } from './App';
+import { ShoppingCartProps, ShoppingCart } from './ShoppingCart';
 
 afterEach(cleanup);
 

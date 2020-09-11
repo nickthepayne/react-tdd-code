@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from 'react-testing-library';
-import { ShoppingCart } from './App';
+import { ShoppingCart } from './ShoppingCart';
 
 describe('ShoppingCart', () => {
     describe('when the cart is empty', () => {
