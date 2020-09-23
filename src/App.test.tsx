@@ -12,6 +12,14 @@ describe('App', () => {
     app = render(<App/>);
   });
 
+  it('displays title "Products"', () => {
+    expect(app.queryByText('Products')).not.toBeNull();
+  });
+
+  it('displays title "Cart"', () => {
+    expect(app.queryByText('Cart')).not.toBeNull();
+  });
+
   it('should initially display "Cart is empty"', () => {
     expect(app.queryByText('Cart is empty')).not.toBeNull();
   });

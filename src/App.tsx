@@ -13,10 +13,12 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <h1>Products</h1>
       <ProductList
         products={products}
         onAddProduct={onAddProduct}
       />
+      <h1>Cart</h1>
       <ShoppingCart
         products={shoppingCart}
       />
